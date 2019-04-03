@@ -12,13 +12,13 @@ namespace P8Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Match
+    public partial class PlayerRelationship
     {
-        public int match_id { get; set; }
-        public Nullable<int> first_player_id { get; set; }
-        public Nullable<int> second_player_id { get; set; }
-        public string match_state { get; set; }
+        public int requester_player_id { get; set; }
+        public int respondent_player_id { get; set; }
+        public string relationship_state { get; set; }
     
         public virtual PlayerLogin PlayerLogin { get; set; }
+        public virtual PlayerLogin PlayerLogin1 { get; set; }
     }
 }

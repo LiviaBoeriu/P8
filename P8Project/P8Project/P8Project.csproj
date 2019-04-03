@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9753137E-0D0D-4169-B3D5-CD811FBCF0DC}</ProjectGuid>
+    <ProjectGuid>{7E44D550-FAB8-49C1-A784-997D24861C54}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,19 +135,55 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MatchController.cs" />
-    <Compile Include="Controllers\MeetupController.cs" />
-    <Compile Include="Controllers\MeetupOwnerController.cs" />
-    <Compile Include="Controllers\MeetupParticipantController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\MeetupsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MeetupOwner.cs" />
-    <Compile Include="Models\Match.cs" />
-    <Compile Include="Models\Meetup.cs" />
-    <Compile Include="Models\MeetupParticipant.cs" />
-    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\DiceItUp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiceItUp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiceItUp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DiceItUp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiceItUp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Game.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Genre.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Match.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Meetup.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MeetupParticipant.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlayerLogin.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlayerProfile.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlayerRelationship.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProfileTitle.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +195,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DiceItUp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DiceItUp.edmx</DependentUpon>
+      <LastGenOutput>DiceItUp.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DiceItUp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DiceItUp.edmx</DependentUpon>
+      <LastGenOutput>DiceItUp.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\DiceItUp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DiceItUp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DiceItUp.edmx.diagram">
+      <DependentUpon>DiceItUp.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -164,7 +225,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\my-script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -179,15 +239,19 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Welcome.cshtml" />
+    <Content Include="Views\PlayerLogins\Create.cshtml" />
+    <Content Include="Views\PlayerLogins\Delete.cshtml" />
+    <Content Include="Views\PlayerLogins\Details.cshtml" />
+    <Content Include="Views\PlayerLogins\Edit.cshtml" />
+    <Content Include="Views\PlayerLogins\Index.cshtml" />
+    <Content Include="Views\Meetups\Create.cshtml" />
+    <Content Include="Views\Meetups\Delete.cshtml" />
+    <Content Include="Views\Meetups\Details.cshtml" />
+    <Content Include="Views\Meetups\Edit.cshtml" />
+    <Content Include="Views\Meetups\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Matchmaking\" />
-    <Folder Include="Views\MeetupOwner\" />
-    <Folder Include="Views\MeetupParticipant\" />
-    <Folder Include="Views\Meetup\" />
-    <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -201,6 +265,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -218,7 +285,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56665</DevelopmentServerPort>
+          <DevelopmentServerPort>50384</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:56665/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

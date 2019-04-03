@@ -1,1 +1,0 @@
-﻿document.getElementById("myCustomAnchor").style.color = 'green';

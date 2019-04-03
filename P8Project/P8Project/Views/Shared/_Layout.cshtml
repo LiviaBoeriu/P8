@@ -28,7 +28,6 @@
         </div>
     </div>
     <div class="container body-content">
-        <a id="myCustomAnchor" href="/user/welcome/1">Click me!</a>
         @RenderBody()
         <hr />
         <footer>
@@ -38,9 +37,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/")
     @RenderSection("scripts", required: false)
-
-    <script type="text/javascript" src="~/Scripts/my-script.js"></script>
 </body>
 </html>

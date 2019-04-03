@@ -12,13 +12,20 @@ namespace P8Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MeetupParticipant
+    public partial class PlayerProfile
     {
-        public int meetup_id { get; set; }
         public int player_id { get; set; }
-        public Nullable<bool> attended { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public Nullable<System.DateTime> date_of_birth { get; set; }
+        public string gender { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public Nullable<int> profile_level { get; set; }
+        public string description { get; set; }
+        public Nullable<decimal> feedback { get; set; }
     
-        public virtual Meetup Meetup { get; set; }
+        public virtual Location Location { get; set; }
         public virtual PlayerLogin PlayerLogin { get; set; }
+        public virtual ProfileTitle ProfileTitle { get; set; }
     }
 }

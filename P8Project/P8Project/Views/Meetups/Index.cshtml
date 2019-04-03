@@ -1,0 +1,87 @@
+﻿@model IEnumerable<P8Project.Models.Meetup>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.meetup_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.meetup_access)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.meetup_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.meetup_note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.game_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre.game_genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.zip_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerLogin.email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetup_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetup_access)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetup_state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetup_note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game.game_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre.game_genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.zip_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerLogin.email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.meetup_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.meetup_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.meetup_id })
+        </td>
+    </tr>
+}
+
+</table>
