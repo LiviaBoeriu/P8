@@ -256,7 +256,6 @@
     <Content Include="Views\PlayerProfiles\Details.cshtml" />
     <Content Include="Views\PlayerProfiles\Edit.cshtml" />
     <Content Include="Views\PlayerProfiles\Index.cshtml" />
-    <Content Include="Views\PlayerProfiles\GetName.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
