@@ -49,7 +49,6 @@ namespace P8Project.Controllers
         }
 
 
-        //hello  kitten
         // GET: MatchMaking/Create
         public ActionResult Create()
         {
@@ -57,7 +56,7 @@ namespace P8Project.Controllers
             ViewBag.player_id = new SelectList(db.PlayerLogins, "player_id", "email");
             ViewBag.profile_level = new SelectList(db.ProfileTitles, "profile_level", "title");
             return View();
-        } 
+        }
 
         // POST: MatchMaking/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
