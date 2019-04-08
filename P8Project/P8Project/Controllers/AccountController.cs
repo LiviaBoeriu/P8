@@ -22,26 +22,8 @@ namespace P8Project.Controllers
 
         public ActionResult Profile(PlayerProfile profile)
         {
+            ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
             return View(profile);
-        }
-        
-
-        // GET: account/login
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PlayerProfile playerProfile = db.PlayerProfiles.Find(id);
-            if (playerProfile == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.location_id = new SelectList(db.Locations, "location_id", "zip_code", playerProfile.location_id);
-            ViewBag.player_id = new SelectList(db.PlayerLogins, "player_id", "email", playerProfile.player_id);
-            ViewBag.profile_level = new SelectList(db.ProfileTitles, "profile_level", "title", playerProfile.profile_level);
-            return View(playerProfile);
         }
 
         // POST: account/login
@@ -56,6 +38,7 @@ namespace P8Project.Controllers
                 var userLogin = db.PlayerLogins.FirstOrDefault(row => row.email == playerLogin.email && row.password == playerLogin.password);
                 if (userLogin != null) {
                     var userProfile = db.PlayerProfiles.FirstOrDefault(row => row.player_id == userLogin.player_id);
+
                     return RedirectToAction("Profile", userProfile);
                 }
                 return View();
