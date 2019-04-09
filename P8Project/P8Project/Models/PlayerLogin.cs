@@ -11,7 +11,10 @@ namespace P8Project.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Web;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PlayerLogin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,11 +30,47 @@ namespace P8Project.Models
             this.Games = new HashSet<Game>();
         }
     
-        public int player_id { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
+ 
+        public int Player_ID { get; set; }
+
+        [Display(Name = "Fornavn")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Fornavn skal udfyldes")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Efternavn")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Efternavn skal udfyldes")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Email")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email skal udfyldes")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Display(Name = "Fødselsdato")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Fødselsdato skal udfyldes")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Display(Name = "Køn")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Køn skal udfyldes")]
+        public int Gender { get; set; }
+
+        [Display(Name = "Adgangskode")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Adgangskode skal udfyldes")]
+        [DataType(DataType.Password)]
+        [MinLength(6, ErrorMessage = "Minimum 6 bogstaver er krævet")]
+        public string Password { get; set; }
+
+        [Display(Name = "Gentag adgangskode")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "De indtastede adgangskoder stemmer ikke overens")]
+        public string ConfirmPassword { get; set; }
+
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Match> Matches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Meetup> Meetups { get; set; }

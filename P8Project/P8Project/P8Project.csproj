@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetupsController.cs" />
+    <Compile Include="Controllers\PlayerLoginsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +206,7 @@
       <DependentUpon>DiceItUp.edmx</DependentUpon>
       <LastGenOutput>DiceItUp.cs</LastGenOutput>
     </Content>
+    <Content Include="Pictures\kitty.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\DiceItUp.edmx">
