@@ -206,7 +206,7 @@
       <DependentUpon>DiceItUp.edmx</DependentUpon>
       <LastGenOutput>DiceItUp.cs</LastGenOutput>
     </Content>
-    <Content Include="Pictures\kitty.jpg" />
+    <Content Include="Pictures_cat\kitty.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\DiceItUp.edmx">
