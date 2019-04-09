@@ -337,17 +337,19 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <EntitySet Name="PlayerTopGames" EntityType="Self.PlayerTopGames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileTitle" EntityType="Self.ProfileTitle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerProfile" EntityType="Self.PlayerProfile" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PlayerProfile].[player_id] AS [player_id], 
-    [PlayerProfile].[first_name] AS [first_name], 
-    [PlayerProfile].[last_name] AS [last_name], 
-    [PlayerProfile].[date_of_birth] AS [date_of_birth], 
-    [PlayerProfile].[gender] AS [gender], 
-    [PlayerProfile].[location_id] AS [location_id], 
-    [PlayerProfile].[profile_level] AS [profile_level], 
-    [PlayerProfile].[description] AS [description], 
-    [PlayerProfile].[feedback] AS [feedback]
-    FROM [dbo].[PlayerProfile] AS [PlayerProfile]</DefiningQuery>
+           <DefiningQuery>
+              SELECT
+              [PlayerProfile].[player_id] AS [player_id],
+              [PlayerProfile].[first_name] AS [first_name],
+              [PlayerProfile].[last_name] AS [last_name],
+              [PlayerProfile].[date_of_birth] AS [date_of_birth],
+              [PlayerProfile].[gender] AS [gender],
+              [PlayerProfile].[location_id] AS [location_id],
+              [PlayerProfile].[profile_level] AS [profile_level],
+              [PlayerProfile].[description] AS [description],
+              [PlayerProfile].[feedback] AS [feedback]
+              FROM [dbo].[PlayerProfile] AS [PlayerProfile]
+            </DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Game__genre_id__6C190EBB" Association="Self.FK__Game__genre_id__6C190EBB">
             <End Role="Genre" EntitySet="Genre" />

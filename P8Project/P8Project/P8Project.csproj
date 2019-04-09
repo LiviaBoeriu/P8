@@ -251,12 +251,12 @@
     <Content Include="Views\Meetups\Details.cshtml" />
     <Content Include="Views\Meetups\Edit.cshtml" />
     <Content Include="Views\Meetups\Index.cshtml" />
-    <Content Include="Views\MatchMaking\Create.cshtml" />
-    <Content Include="Views\MatchMaking\Delete.cshtml" />
-    <Content Include="Views\MatchMaking\Details.cshtml" />
-    <Content Include="Views\MatchMaking\Edit.cshtml" />
-    <Content Include="Views\MatchMaking\Index.cshtml" />
-    <Content Include="Views\MatchMaking\FilterMatches.cshtml" />
+    <Content Include="Views\Matchmaking\Create.cshtml" />
+    <Content Include="Views\Matchmaking\Delete.cshtml" />
+    <Content Include="Views\Matchmaking\Details.cshtml" />
+    <Content Include="Views\Matchmaking\Edit.cshtml" />
+    <Content Include="Views\Matchmaking\Index.cshtml" />
+    <Content Include="Views\Matchmaking\FilterMatches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
