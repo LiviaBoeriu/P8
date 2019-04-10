@@ -24,6 +24,7 @@ namespace P8Project.Controllers
         {
             ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
             ViewData["ProfileLocation"] = db.Locations.FirstOrDefault(row => row.location_id == profile.location_id).city;
+
             return View(profile);
         }
 

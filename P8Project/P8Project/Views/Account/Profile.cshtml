@@ -5,9 +5,11 @@
     ViewBag.Title = "Profile";
 }
 
+@Scripts.Render("~/Scripts/utilities.js")
+
 <div class="profile-banner">
     <span>
-    @Html.DisplayFor(m => m.first_name)
+        @Html.DisplayFor(m => m.first_name)
     </span>
     <span>
         @ViewData["ProfileTitle"]
@@ -19,8 +21,13 @@
     <div class="profile-image"><img src="not_found.jpg" alt=" "></div>
     <p>Location: @ViewData["ProfileLocation"] </p>
     <p>
-        Age: @Html.DisplayFor(m => m.date_of_birth)
+        Age: 
+        <span id="age">
+            @*@Html.DisplayFor(m => m.date_of_birth) currentItem.ScheduleStartDateTime.ToString("yyyy/MM/dd"))*@
+        </span>
     </p>
 </div>
 
-
+<script type="text/javascript">
+    document.getElementById('age').innerHTML = getAge()
+</script>
