@@ -18,12 +18,12 @@
 <div class="profile-card-container">
     <span> @ViewData["ProfileTitle"]</span>
     <span>@Html.DisplayFor(m => m.first_name)</span>
-    <div class="profile-image"><img src="not_found.jpg" alt=" "></div>
+    <div class="profile-image"><img src="https://d12swbtw719y4s.cloudfront.net/images/ldwIePQO/DpcLC6v8dV1gpQAF21wD/Skin.jpeg?w=620" alt=" "></div>
     <p>Location: @ViewData["ProfileLocation"] </p>
     <p>
-        Age: 
+        Age:
         <span id="age">
-            @*@Html.DisplayFor(m => m.date_of_birth) currentItem.ScheduleStartDateTime.ToString("yyyy/MM/dd"))*@
+            "@Model.date_of_birth.Value.ToString("yyyy-MM-dd")";
         </span>
     </p>
 </div>
