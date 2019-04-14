@@ -13,7 +13,12 @@ namespace P8Project.Controllers
 
     public class AccountController : Controller
     {
-        private DiceItUpEntities2 db = new DiceItUpEntities2();
+        private readonly DiceItUpEntities2 db = new DiceItUpEntities2();
+
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         public ActionResult Login()
         {
@@ -45,9 +50,35 @@ namespace P8Project.Controllers
             }
            return View();
         }
-            //ViewBag.location_id = new SelectList(db.Locations, "location_id", "zip_code", playerProfile.location_id);
-            //ViewBag.player_id = new SelectList(db.PlayerLogins, "player_id", "email", playerProfile.player_id);
-            //ViewBag.profile_level = new SelectList(db.ProfileTitles, "profile_level", "title", playerProfile.profile_level);
-            //return Redirect("Account/Profile");
+
+
+        // GET: Account/Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //POST: Account/Register
+        // To protect from overposting attacks, please enable the specific properties you want to bind to
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "email , password")] PlayerLogin playerLogin, [Bind(Include = "first_name, last_name")] PlayerProfile playerProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                var userLogin = db.PlayerLogins.FirstOrDefault(row => row.email == playerLogin.email && row.password == playerLogin.password);
+                if (userLogin == null)
+                {
+                    db.PlayerLogins.Add(playerLogin);
+                    db.PlayerProfiles.Add(playerProfile);
+                    db.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+
+            }
+            return View();
+        }
+
     }
+
 }

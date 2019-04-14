@@ -5,6 +5,7 @@
     ViewBag.Title = "Profile";
 }
 
-<h2>@Html.DisplayFor(m => m.first_name)</h2>
-<h3>@ViewData["ProfileTitle"]</h3>
-
+<div>
+    <span>@Html.DisplayFor(m => m.first_name)</span>
+    <span>@ViewData["ProfileTitle"]</span>
+</div>

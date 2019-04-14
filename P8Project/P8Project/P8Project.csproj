@@ -251,17 +251,13 @@
     <Content Include="Views\Meetups\Details.cshtml" />
     <Content Include="Views\Meetups\Edit.cshtml" />
     <Content Include="Views\Meetups\Index.cshtml" />
-    <Content Include="Views\PlayerProfiles\Create.cshtml" />
-    <Content Include="Views\PlayerProfiles\Delete.cshtml" />
-    <Content Include="Views\PlayerProfiles\Details.cshtml" />
-    <Content Include="Views\PlayerProfiles\Edit.cshtml" />
-    <Content Include="Views\PlayerProfiles\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
