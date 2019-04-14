@@ -24,15 +24,7 @@ namespace P8Project.Controllers
         {
             return View();
         }
-
-        public ActionResult Profile(PlayerProfile profile)
-        {
-            ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
-            ViewData["ProfileLocation"] = db.Locations.FirstOrDefault(row => row.location_id == profile.location_id).city;
-
-            return View(profile);
-        }
-
+        
         // POST: account/login
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -54,18 +46,30 @@ namespace P8Project.Controllers
            return View();
         }
 
+        public ActionResult Profile(PlayerProfile profile)
+        {
+            ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
+            ViewData["ProfileLocation"] = db.Locations.FirstOrDefault(row => row.location_id == profile.location_id).city;
+
+            return View(profile);
+        }
+
 
         // GET: Account/Register
-        public ActionResult Register()
+        public ActionResult Register(PlayerProfile playerProfile)
         {
-            return View();
+            if (playerProfile.player_id == 0) {
+                return View();
+            }
+
+            return View("Create");
         }
 
         //POST: Account/Register
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "email , password")] PlayerLogin playerLogin, [Bind(Include = "first_name, last_name")] PlayerProfile playerProfile)
+        public ActionResult Register([Bind(Include = "email , password")] PlayerLogin playerLogin)
         {
             if (ModelState.IsValid)
             {
@@ -73,15 +77,13 @@ namespace P8Project.Controllers
                 if (userLogin == null)
                 {
                     db.PlayerLogins.Add(playerLogin);
-                    db.PlayerProfiles.Add(playerProfile);
                     db.SaveChanges();
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Register", "Account", playerLogin);
                 }
 
             }
             return View();
         }
-
     }
 
 }
