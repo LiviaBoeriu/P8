@@ -28,6 +28,8 @@ namespace P8Project.Controllers
         public ActionResult Profile(PlayerProfile profile)
         {
             ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
+            ViewData["ProfileLocation"] = db.Locations.FirstOrDefault(row => row.location_id == profile.location_id).city;
+
             return View(profile);
         }
 
@@ -43,6 +45,7 @@ namespace P8Project.Controllers
                 var userLogin = db.PlayerLogins.FirstOrDefault(row => row.email == playerLogin.email && row.password == playerLogin.password);
                 if (userLogin != null) {
                     var userProfile = db.PlayerProfiles.FirstOrDefault(row => row.player_id == userLogin.player_id);
+                    
 
                     return RedirectToAction("Profile", userProfile);
                 }
