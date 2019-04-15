@@ -14,108 +14,173 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    @* Some things shouuld be put in here from the controller, where we declare the action result *@
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        //Div class should be changed
-        <div class="form-horizontal">
-            <hr/>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @* Local header *@
-            <img src=~/Pictures/kitty.jpg alt="logo"
-            @* Login *@
-            <div class="email">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="email">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <form id="form1" runat="server">
+            <div class="page-header">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @* Local header *@
+                <div>
+                    <img src=~/Pictures_cat/kitty.jpg alt="logo"
                 </div>
-            </div>
-            <div class="password">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="password">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="login">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Log på" class="btn btn-default" />
-                </div>
-            </div>
-            <hr/>
-        </div>
-        @* About us *@
-        <h1>Om os</h1>
-            <p>Kort tekst om os.</p>
-                <img src=~/Pictures/kitty.jpg alt="displayPicture">
-        <hr/>
-        @* Registration *@
-        <h1>Opret en ny konto</h1>
-        <p>Beskrivelse af oprettelse af konto.</p>
-        <div class="validationMessage">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="firstName">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="firstName">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                </div>
+
+                @* Login *@
+                <table>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    @* Email *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="email">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email)
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="password">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Login button *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="login_button">
+                                <input type="submit" runat="server" value="Log ind" class="btn btn-default" onclick="LoginButtonClick();"/>
+                            </div>
+                        </td>
+                </table>
             </div>
 
-            <div class="lastName">
-
-                
-                    @*<asp:Label ID="lblfn" Text="Confirm Password"></asp:Label>
-                </div>*@
-
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="lastName">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="email">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="email">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="dateOfBirth">
-                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="dateOfBirth">
-                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="gender">
-                <input type="radio" name="gender" value="1" required> Male<br>
-                <input type="radio" name="gender" value="2" required> Female<br>
-            </div>
-            <div class="password">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="password">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="confirmPassword">
-                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="confirmPassword">
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
+            @* About us *@
+            <div class="about_us">
+                <h1>Om os</h1>
+                <p>Kort tekst om os.</p>
+                <img src=~/Pictures_cat/kitty.jpg alt="displayPicture">
+                <hr />
             </div>
 
-            <div class="createProfile">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Opret profil" class="btn btn-default" />
-                </div>
+
+            @* Registration *@
+            <div class="registration">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <h1>Opret en ny konto</h1>
+                            <p>Beskrivelse af oprettelse af konto.</p>
+                        </td>
+                    </tr>
+                    @* First name *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="firstName">
+                                @Html.LabelFor(model => model.FirstName)
+                                @Html.EditorFor(model => model.FirstName)
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Last name *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="lastName">
+                                @Html.LabelFor(model => model.LastName)
+                                @Html.EditorFor(model => model.LastName)
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Email *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="email">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email)
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="password">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Confirm password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="confirmPassword">
+                                @Html.LabelFor(model => model.ConfirmPassword)
+                                @Html.EditorFor(model => model.ConfirmPassword)
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Date of birth *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="dateOfBirth">
+                                @Html.LabelFor(model => model.DateOfBirth)
+                                @Html.EditorFor(model => model.DateOfBirth)
+                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Gender *@
+                    <tr>
+                        <td></td>
+                        <td>
+
+                            <div class="Gender">
+                                Male
+                                @Html.RadioButtonFor(model => model.Gender, "M")
+                                Female
+                                @Html.RadioButtonFor(model => model.Gender, "F")
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Submit button *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="createProfileButton">
+                                <input type="submit" value="Opret profil" class="btn btn-default" />
+                                @*<input type="submit" runat="server" value="Opret profil" class="btn btn-default" onclick="LoginButtonClick"/>*@
+
+
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
-        </div>
+        </form>
     }
 </body>
 </html>

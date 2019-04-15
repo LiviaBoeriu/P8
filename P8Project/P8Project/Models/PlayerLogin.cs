@@ -54,7 +54,7 @@ namespace P8Project.Models
 
         [Display(Name = "Køn")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Køn skal udfyldes")]
-        public int Gender { get; set; }
+        public char Gender { get; set; }
 
         [Display(Name = "Adgangskode")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Adgangskode skal udfyldes")]
