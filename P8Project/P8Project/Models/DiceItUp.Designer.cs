@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\julia\Source\Repos\P8\P8Project\P8Project\Models\DiceItUp.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Iben\Source\Repos\P8\P8Project\P8Project\Models\DiceItUp.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

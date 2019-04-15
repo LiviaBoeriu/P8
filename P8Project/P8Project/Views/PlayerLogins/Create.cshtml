@@ -1,56 +1,186 @@
 ﻿@model P8Project.Models.PlayerLogin
 
 @{
-    ViewBag.Title = "Create";
+    Layout = null;
 }
 
-<h2>Create</h2>
+<!DOCTYPE html>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PlayerLogin</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.player_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.player_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.player_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-}
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <form id="form1" runat="server">
+            <div class="page-header">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @* Local header *@
+                <div>
+                    <img src=~/Pictures_cat/kitty.jpg alt="logo"
+                </div>
+
+                @* Login *@
+                <table>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    @* Email *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="email">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email)
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="password">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Login button *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="login_button">
+                                <input type="submit" runat="server" value="Log ind" class="btn btn-default" onclick="LoginButtonClick();"/>
+                            </div>
+                        </td>
+                </table>
+            </div>
+
+            @* About us *@
+            <div class="about_us">
+                <h1>Om os</h1>
+                <p>Kort tekst om os.</p>
+                <img src=~/Pictures_cat/kitty.jpg alt="displayPicture">
+                <hr />
+            </div>
+
+
+            @* Registration *@
+            <div class="registration">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <h1>Opret en ny konto</h1>
+                            <p>Beskrivelse af oprettelse af konto.</p>
+                        </td>
+                    </tr>
+                    @* First name *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="firstName">
+                                @Html.LabelFor(model => model.FirstName)
+                                @Html.EditorFor(model => model.FirstName)
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Last name *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="lastName">
+                                @Html.LabelFor(model => model.LastName)
+                                @Html.EditorFor(model => model.LastName)
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Email *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="email">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.EditorFor(model => model.Email)
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="password">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.EditorFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Confirm password *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="confirmPassword">
+                                @Html.LabelFor(model => model.ConfirmPassword)
+                                @Html.EditorFor(model => model.ConfirmPassword)
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Date of birth *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="dateOfBirth">
+                                @Html.LabelFor(model => model.DateOfBirth)
+                                @Html.EditorFor(model => model.DateOfBirth)
+                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Gender *@
+                    <tr>
+                        <td></td>
+                        <td>
+
+                            <div class="Gender">
+                                Male
+                                @Html.RadioButtonFor(model => model.Gender, "M")
+                                Female
+                                @Html.RadioButtonFor(model => model.Gender, "F")
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                    @* Submit button *@
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="createProfileButton">
+                                <input type="submit" value="Opret profil" class="btn btn-default" />
+                                @*<input type="submit" runat="server" value="Opret profil" class="btn btn-default" onclick="LoginButtonClick"/>*@
+
+
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    }
+</body>
+</html>
