@@ -28,7 +28,7 @@ namespace P8Project.Controllers
             ViewData["ProfileTitle"] = db.ProfileTitles.FirstOrDefault(row => row.profile_level == profile.profile_level).title;
             return View(profile);
         }
-
+        // hello kitten
         //check if strings are empty
 
         // POST: account/login
