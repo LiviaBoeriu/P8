@@ -1,0 +1,74 @@
+﻿@model P8Project.Models.PlayerProfile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlayerProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date_of_birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_of_birth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.feedback)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.feedback)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.zip_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.zip_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerLogin.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlayerLogin.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileTitle.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileTitle.title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
