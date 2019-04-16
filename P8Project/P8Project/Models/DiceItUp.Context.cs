@@ -13,10 +13,10 @@ namespace P8Project.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DiceItUpEntities2 : DbContext
+    public partial class DiceItUpEntities4 : DbContext
     {
-        public DiceItUpEntities2()
-            : base("name=DiceItUpEntities2")
+        public DiceItUpEntities4()
+            : base("name=DiceItUpEntities4")
         {
         }
     
@@ -32,8 +32,9 @@ namespace P8Project.Models
         public virtual DbSet<Meetup> Meetups { get; set; }
         public virtual DbSet<MeetupParticipant> MeetupParticipants { get; set; }
         public virtual DbSet<PlayerLogin> PlayerLogins { get; set; }
+        public virtual DbSet<PlayerProfile> PlayerProfiles { get; set; }
         public virtual DbSet<PlayerRelationship> PlayerRelationships { get; set; }
         public virtual DbSet<ProfileTitle> ProfileTitles { get; set; }
-        public virtual DbSet<PlayerProfile> PlayerProfiles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -136,7 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetupsController.cs" />
-    <Compile Include="Controllers\PlayerLoginsController.cs" />
+    <Compile Include="Controllers\PlayerLoginsControllerDemo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +183,9 @@
       <DependentUpon>DiceItUp.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProfileTitle.cs">
+      <DependentUpon>DiceItUp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>DiceItUp.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
