@@ -78,14 +78,11 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PlayerProfile">
           <Key>
-            <PropertyRef Name="player_id" />
-            <PropertyRef Name="first_name" />
-            <PropertyRef Name="last_name" />
+            <PropertyRef Name="profile_id" />
           </Key>
+          <Property Name="profile_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="player_id" Type="int" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="last_name" Type="varchar" MaxLength="20" Nullable="false" />
@@ -120,7 +117,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="profile_level" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="30" />
         </EntityType>
-        <Association Name="FK__Game__genre_id__6C190EBB">
+        <Association Name="FK__Game__genre_id__5629CD9C">
           <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
           <End Role="Game" Type="Self.Game" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,7 +129,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Match__second_pl__74AE54BC">
+        <Association Name="FK__Match__second_pl__5EBF139D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
           <End Role="Match" Type="Self.Match" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,7 +141,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__game_id__6FE99F9F">
+        <Association Name="FK__Meetup__game_id__59FA5E80">
           <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -156,7 +153,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__genre_id__70DDC3D8">
+        <Association Name="FK__Meetup__genre_id__5AEE82B9">
           <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -168,7 +165,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__location__6EF57B66">
+        <Association Name="FK__Meetup__location__59063A47">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -180,7 +177,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__player_i__71D1E811">
+        <Association Name="FK__Meetup__player_i__5BE2A6F2">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -192,7 +189,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeetupPar__meetu__7F2BE32F">
+        <Association Name="FK__MeetupPar__meetu__693CA210">
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="1" />
           <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +201,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeetupPar__playe__00200768">
+        <Association Name="FK__MeetupPar__playe__6A30C649">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +213,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerGam__genre__787EE5A0">
+        <Association Name="FK__PlayerGam__genre__628FA481">
           <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
           <End Role="PlayerGamePreferences" Type="Self.PlayerGamePreferences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -228,7 +225,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerGam__playe__778AC167">
+        <Association Name="FK__PlayerGam__playe__619B8048">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerGamePreferences" Type="Self.PlayerGamePreferences" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,7 +237,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__locat__66603565">
+        <Association Name="FK__PlayerPro__locat__5070F446">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +249,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__playe__656C112C">
+        <Association Name="FK__PlayerPro__playe__4F7CD00D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,7 +261,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__profi__6754599E">
+        <Association Name="FK__PlayerPro__profi__5165187F">
           <End Role="ProfileTitle" Type="Self.ProfileTitle" Multiplicity="0..1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,7 +273,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerRel__reque__02FC7413">
+        <Association Name="FK__PlayerRel__reque__6D0D32F4">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,7 +285,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerRel__respo__03F0984C">
+        <Association Name="FK__PlayerRel__respo__6E01572D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -300,7 +297,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerTop__game___7C4F7684">
+        <Association Name="FK__PlayerTop__game___66603565">
           <End Role="Game" Type="Self.Game" Multiplicity="1" />
           <End Role="PlayerTopGames" Type="Self.PlayerTopGames" Multiplicity="*" />
           <ReferentialConstraint>
@@ -312,7 +309,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerTop__playe__7B5B524B">
+        <Association Name="FK__PlayerTop__playe__656C112C">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerTopGames" Type="Self.PlayerTopGames" Multiplicity="*" />
           <ReferentialConstraint>
@@ -333,87 +330,75 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <EntitySet Name="MeetupParticipant" EntityType="Self.MeetupParticipant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerGamePreferences" EntityType="Self.PlayerGamePreferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerLogin" EntityType="Self.PlayerLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerProfile" EntityType="Self.PlayerProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerRelationship" EntityType="Self.PlayerRelationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlayerTopGames" EntityType="Self.PlayerTopGames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileTitle" EntityType="Self.ProfileTitle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlayerProfile" EntityType="Self.PlayerProfile" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PlayerProfile].[player_id] AS [player_id], 
-    [PlayerProfile].[first_name] AS [first_name], 
-    [PlayerProfile].[last_name] AS [last_name], 
-    [PlayerProfile].[date_of_birth] AS [date_of_birth], 
-    [PlayerProfile].[gender] AS [gender], 
-    [PlayerProfile].[location_id] AS [location_id], 
-    [PlayerProfile].[profile_level] AS [profile_level], 
-    [PlayerProfile].[description] AS [description], 
-    [PlayerProfile].[feedback] AS [feedback]
-    FROM [dbo].[PlayerProfile] AS [PlayerProfile]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Game__genre_id__6C190EBB" Association="Self.FK__Game__genre_id__6C190EBB">
+          <AssociationSet Name="FK__Game__genre_id__5629CD9C" Association="Self.FK__Game__genre_id__5629CD9C">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Game" EntitySet="Game" />
           </AssociationSet>
-          <AssociationSet Name="FK__Match__second_pl__74AE54BC" Association="Self.FK__Match__second_pl__74AE54BC">
+          <AssociationSet Name="FK__Match__second_pl__5EBF139D" Association="Self.FK__Match__second_pl__5EBF139D">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__game_id__6FE99F9F" Association="Self.FK__Meetup__game_id__6FE99F9F">
+          <AssociationSet Name="FK__Meetup__game_id__59FA5E80" Association="Self.FK__Meetup__game_id__59FA5E80">
             <End Role="Game" EntitySet="Game" />
             <End Role="Meetup" EntitySet="Meetup" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__genre_id__70DDC3D8" Association="Self.FK__Meetup__genre_id__70DDC3D8">
+          <AssociationSet Name="FK__Meetup__genre_id__5AEE82B9" Association="Self.FK__Meetup__genre_id__5AEE82B9">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Meetup" EntitySet="Meetup" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__location__6EF57B66" Association="Self.FK__Meetup__location__6EF57B66">
+          <AssociationSet Name="FK__Meetup__location__59063A47" Association="Self.FK__Meetup__location__59063A47">
             <End Role="Location" EntitySet="Location" />
             <End Role="Meetup" EntitySet="Meetup" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__player_i__71D1E811" Association="Self.FK__Meetup__player_i__71D1E811">
+          <AssociationSet Name="FK__Meetup__player_i__5BE2A6F2" Association="Self.FK__Meetup__player_i__5BE2A6F2">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="Meetup" EntitySet="Meetup" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeetupPar__meetu__7F2BE32F" Association="Self.FK__MeetupPar__meetu__7F2BE32F">
+          <AssociationSet Name="FK__MeetupPar__meetu__693CA210" Association="Self.FK__MeetupPar__meetu__693CA210">
             <End Role="Meetup" EntitySet="Meetup" />
             <End Role="MeetupParticipant" EntitySet="MeetupParticipant" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeetupPar__playe__00200768" Association="Self.FK__MeetupPar__playe__00200768">
+          <AssociationSet Name="FK__MeetupPar__playe__6A30C649" Association="Self.FK__MeetupPar__playe__6A30C649">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="MeetupParticipant" EntitySet="MeetupParticipant" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerGam__genre__787EE5A0" Association="Self.FK__PlayerGam__genre__787EE5A0">
+          <AssociationSet Name="FK__PlayerGam__genre__628FA481" Association="Self.FK__PlayerGam__genre__628FA481">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="PlayerGamePreferences" EntitySet="PlayerGamePreferences" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerGam__playe__778AC167" Association="Self.FK__PlayerGam__playe__778AC167">
+          <AssociationSet Name="FK__PlayerGam__playe__619B8048" Association="Self.FK__PlayerGam__playe__619B8048">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="PlayerGamePreferences" EntitySet="PlayerGamePreferences" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__locat__66603565" Association="Self.FK__PlayerPro__locat__66603565">
+          <AssociationSet Name="FK__PlayerPro__locat__5070F446" Association="Self.FK__PlayerPro__locat__5070F446">
             <End Role="Location" EntitySet="Location" />
             <End Role="PlayerProfile" EntitySet="PlayerProfile" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__playe__656C112C" Association="Self.FK__PlayerPro__playe__656C112C">
+          <AssociationSet Name="FK__PlayerPro__playe__4F7CD00D" Association="Self.FK__PlayerPro__playe__4F7CD00D">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="PlayerProfile" EntitySet="PlayerProfile" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__profi__6754599E" Association="Self.FK__PlayerPro__profi__6754599E">
+          <AssociationSet Name="FK__PlayerPro__profi__5165187F" Association="Self.FK__PlayerPro__profi__5165187F">
             <End Role="ProfileTitle" EntitySet="ProfileTitle" />
             <End Role="PlayerProfile" EntitySet="PlayerProfile" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerRel__reque__02FC7413" Association="Self.FK__PlayerRel__reque__02FC7413">
+          <AssociationSet Name="FK__PlayerRel__reque__6D0D32F4" Association="Self.FK__PlayerRel__reque__6D0D32F4">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="PlayerRelationship" EntitySet="PlayerRelationship" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerRel__respo__03F0984C" Association="Self.FK__PlayerRel__respo__03F0984C">
+          <AssociationSet Name="FK__PlayerRel__respo__6E01572D" Association="Self.FK__PlayerRel__respo__6E01572D">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="PlayerRelationship" EntitySet="PlayerRelationship" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerTop__game___7C4F7684" Association="Self.FK__PlayerTop__game___7C4F7684">
+          <AssociationSet Name="FK__PlayerTop__game___66603565" Association="Self.FK__PlayerTop__game___66603565">
             <End Role="Game" EntitySet="Game" />
             <End Role="PlayerTopGames" EntitySet="PlayerTopGames" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerTop__playe__7B5B524B" Association="Self.FK__PlayerTop__playe__7B5B524B">
+          <AssociationSet Name="FK__PlayerTop__playe__656C112C" Association="Self.FK__PlayerTop__playe__656C112C">
             <End Role="PlayerLogin" EntitySet="PlayerLogin" />
             <End Role="PlayerTopGames" EntitySet="PlayerTopGames" />
           </AssociationSet>
@@ -430,8 +415,8 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="game_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="genre_id" Type="Int32" />
           <Property Name="game_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Genre" Relationship="Self.FK__Game__genre_id__6C190EBB" FromRole="Game" ToRole="Genre" />
-          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__game_id__6FE99F9F" FromRole="Game" ToRole="Meetup" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Game__genre_id__5629CD9C" FromRole="Game" ToRole="Genre" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__game_id__59FA5E80" FromRole="Game" ToRole="Meetup" />
           <NavigationProperty Name="PlayerLogins" Relationship="Self.PlayerTopGames" FromRole="Game" ToRole="PlayerLogin" />
         </EntityType>
         <EntityType Name="Genre">
@@ -440,8 +425,8 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           </Key>
           <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="game_genre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Games" Relationship="Self.FK__Game__genre_id__6C190EBB" FromRole="Genre" ToRole="Game" />
-          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__genre_id__70DDC3D8" FromRole="Genre" ToRole="Meetup" />
+          <NavigationProperty Name="Games" Relationship="Self.FK__Game__genre_id__5629CD9C" FromRole="Genre" ToRole="Game" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__genre_id__5AEE82B9" FromRole="Genre" ToRole="Meetup" />
           <NavigationProperty Name="PlayerLogins" Relationship="Self.PlayerGamePreferences" FromRole="Genre" ToRole="PlayerLogin" />
         </EntityType>
         <EntityType Name="Location">
@@ -451,8 +436,8 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="zip_code" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__location__6EF57B66" FromRole="Location" ToRole="Meetup" />
-          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__locat__66603565" FromRole="Location" ToRole="PlayerProfile" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__location__59063A47" FromRole="Location" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__locat__5070F446" FromRole="Location" ToRole="PlayerProfile" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -462,7 +447,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="first_player_id" Type="Int32" />
           <Property Name="second_player_id" Type="Int32" />
           <Property Name="match_state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__Match__second_pl__74AE54BC" FromRole="Match" ToRole="PlayerLogin" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__Match__second_pl__5EBF139D" FromRole="Match" ToRole="PlayerLogin" />
         </EntityType>
         <EntityType Name="Meetup">
           <Key>
@@ -479,11 +464,11 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="genre_id" Type="Int32" />
           <Property Name="meetup_note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="player_id" Type="Int32" />
-          <NavigationProperty Name="Game" Relationship="Self.FK__Meetup__game_id__6FE99F9F" FromRole="Meetup" ToRole="Game" />
-          <NavigationProperty Name="Genre" Relationship="Self.FK__Meetup__genre_id__70DDC3D8" FromRole="Meetup" ToRole="Genre" />
-          <NavigationProperty Name="Location" Relationship="Self.FK__Meetup__location__6EF57B66" FromRole="Meetup" ToRole="Location" />
-          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__Meetup__player_i__71D1E811" FromRole="Meetup" ToRole="PlayerLogin" />
-          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__meetu__7F2BE32F" FromRole="Meetup" ToRole="MeetupParticipant" />
+          <NavigationProperty Name="Game" Relationship="Self.FK__Meetup__game_id__59FA5E80" FromRole="Meetup" ToRole="Game" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Meetup__genre_id__5AEE82B9" FromRole="Meetup" ToRole="Genre" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Meetup__location__59063A47" FromRole="Meetup" ToRole="Location" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__Meetup__player_i__5BE2A6F2" FromRole="Meetup" ToRole="PlayerLogin" />
+          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__meetu__693CA210" FromRole="Meetup" ToRole="MeetupParticipant" />
         </EntityType>
         <EntityType Name="MeetupParticipant">
           <Key>
@@ -493,8 +478,8 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="meetup_id" Type="Int32" Nullable="false" />
           <Property Name="player_id" Type="Int32" Nullable="false" />
           <Property Name="attended" Type="Boolean" />
-          <NavigationProperty Name="Meetup" Relationship="Self.FK__MeetupPar__meetu__7F2BE32F" FromRole="MeetupParticipant" ToRole="Meetup" />
-          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__MeetupPar__playe__00200768" FromRole="MeetupParticipant" ToRole="PlayerLogin" />
+          <NavigationProperty Name="Meetup" Relationship="Self.FK__MeetupPar__meetu__693CA210" FromRole="MeetupParticipant" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__MeetupPar__playe__6A30C649" FromRole="MeetupParticipant" ToRole="PlayerLogin" />
         </EntityType>
         <EntityType Name="PlayerLogin">
           <Key>
@@ -503,40 +488,20 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="player_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Matches" Relationship="Self.FK__Match__second_pl__74AE54BC" FromRole="PlayerLogin" ToRole="Match" />
-          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__player_i__71D1E811" FromRole="PlayerLogin" ToRole="Meetup" />
-          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__playe__00200768" FromRole="PlayerLogin" ToRole="MeetupParticipant" />
-          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__playe__656C112C" FromRole="PlayerLogin" ToRole="PlayerProfile" />
-          <NavigationProperty Name="PlayerRelationships" Relationship="Self.FK__PlayerRel__reque__02FC7413" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
-          <NavigationProperty Name="PlayerRelationships1" Relationship="Self.FK__PlayerRel__respo__03F0984C" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Match__second_pl__5EBF139D" FromRole="PlayerLogin" ToRole="Match" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__player_i__5BE2A6F2" FromRole="PlayerLogin" ToRole="Meetup" />
+          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__playe__6A30C649" FromRole="PlayerLogin" ToRole="MeetupParticipant" />
+          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__playe__4F7CD00D" FromRole="PlayerLogin" ToRole="PlayerProfile" />
+          <NavigationProperty Name="PlayerRelationships" Relationship="Self.FK__PlayerRel__reque__6D0D32F4" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
+          <NavigationProperty Name="PlayerRelationships1" Relationship="Self.FK__PlayerRel__respo__6E01572D" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
           <NavigationProperty Name="Genres" Relationship="Self.PlayerGamePreferences" FromRole="PlayerLogin" ToRole="Genre" />
           <NavigationProperty Name="Games" Relationship="Self.PlayerTopGames" FromRole="PlayerLogin" ToRole="Game" />
         </EntityType>
-        <EntityType Name="PlayerRelationship">
-          <Key>
-            <PropertyRef Name="requester_player_id" />
-            <PropertyRef Name="respondent_player_id" />
-          </Key>
-          <Property Name="requester_player_id" Type="Int32" Nullable="false" />
-          <Property Name="respondent_player_id" Type="Int32" Nullable="false" />
-          <Property Name="relationship_state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerRel__reque__02FC7413" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
-          <NavigationProperty Name="PlayerLogin1" Relationship="Self.FK__PlayerRel__respo__03F0984C" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
-        </EntityType>
-        <EntityType Name="ProfileTitle">
-          <Key>
-            <PropertyRef Name="profile_level" />
-          </Key>
-          <Property Name="profile_level" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__profi__6754599E" FromRole="ProfileTitle" ToRole="PlayerProfile" />
-        </EntityType>
         <EntityType Name="PlayerProfile">
           <Key>
-            <PropertyRef Name="player_id" />
-            <PropertyRef Name="first_name" />
-            <PropertyRef Name="last_name" />
+            <PropertyRef Name="profile_id" />
           </Key>
+          <Property Name="profile_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="player_id" Type="Int32" Nullable="false" />
           <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
@@ -546,11 +511,30 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <Property Name="profile_level" Type="Int32" />
           <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="feedback" Type="Decimal" Precision="3" Scale="2" />
-          <NavigationProperty Name="Location" Relationship="Self.FK__PlayerPro__locat__66603565" FromRole="PlayerProfile" ToRole="Location" />
-          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerPro__playe__656C112C" FromRole="PlayerProfile" ToRole="PlayerLogin" />
-          <NavigationProperty Name="ProfileTitle" Relationship="Self.FK__PlayerPro__profi__6754599E" FromRole="PlayerProfile" ToRole="ProfileTitle" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__PlayerPro__locat__5070F446" FromRole="PlayerProfile" ToRole="Location" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerPro__playe__4F7CD00D" FromRole="PlayerProfile" ToRole="PlayerLogin" />
+          <NavigationProperty Name="ProfileTitle" Relationship="Self.FK__PlayerPro__profi__5165187F" FromRole="PlayerProfile" ToRole="ProfileTitle" />
         </EntityType>
-        <Association Name="FK__Game__genre_id__6C190EBB">
+        <EntityType Name="PlayerRelationship">
+          <Key>
+            <PropertyRef Name="requester_player_id" />
+            <PropertyRef Name="respondent_player_id" />
+          </Key>
+          <Property Name="requester_player_id" Type="Int32" Nullable="false" />
+          <Property Name="respondent_player_id" Type="Int32" Nullable="false" />
+          <Property Name="relationship_state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerRel__reque__6D0D32F4" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
+          <NavigationProperty Name="PlayerLogin1" Relationship="Self.FK__PlayerRel__respo__6E01572D" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="ProfileTitle">
+          <Key>
+            <PropertyRef Name="profile_level" />
+          </Key>
+          <Property Name="profile_level" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__profi__5165187F" FromRole="ProfileTitle" ToRole="PlayerProfile" />
+        </EntityType>
+        <Association Name="FK__Game__genre_id__5629CD9C">
           <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
           <End Role="Game" Type="Self.Game" Multiplicity="*" />
           <ReferentialConstraint>
@@ -562,7 +546,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__game_id__6FE99F9F">
+        <Association Name="FK__Meetup__game_id__59FA5E80">
           <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -574,7 +558,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__genre_id__70DDC3D8">
+        <Association Name="FK__Meetup__genre_id__5AEE82B9">
           <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -586,7 +570,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__location__6EF57B66">
+        <Association Name="FK__Meetup__location__59063A47">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -598,7 +582,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__locat__66603565">
+        <Association Name="FK__PlayerPro__locat__5070F446">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -610,7 +594,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Match__second_pl__74AE54BC">
+        <Association Name="FK__Match__second_pl__5EBF139D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
           <End Role="Match" Type="Self.Match" Multiplicity="*" />
           <ReferentialConstraint>
@@ -622,7 +606,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Meetup__player_i__71D1E811">
+        <Association Name="FK__Meetup__player_i__5BE2A6F2">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
           <ReferentialConstraint>
@@ -634,7 +618,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeetupPar__meetu__7F2BE32F">
+        <Association Name="FK__MeetupPar__meetu__693CA210">
           <End Role="Meetup" Type="Self.Meetup" Multiplicity="1" />
           <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
           <ReferentialConstraint>
@@ -646,7 +630,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeetupPar__playe__00200768">
+        <Association Name="FK__MeetupPar__playe__6A30C649">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
           <ReferentialConstraint>
@@ -658,7 +642,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__playe__656C112C">
+        <Association Name="FK__PlayerPro__playe__4F7CD00D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -670,7 +654,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerRel__reque__02FC7413">
+        <Association Name="FK__PlayerRel__reque__6D0D32F4">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -682,7 +666,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerRel__respo__03F0984C">
+        <Association Name="FK__PlayerRel__respo__6E01572D">
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
           <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -694,7 +678,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlayerPro__profi__6754599E">
+        <Association Name="FK__PlayerPro__profi__5165187F">
           <End Role="ProfileTitle" Type="Self.ProfileTitle" Multiplicity="0..1" />
           <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -714,7 +698,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <End Role="Game" Type="Self.Game" Multiplicity="*" />
           <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="DiceItUpEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DiceItUpEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Games" EntityType="Self.Game" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
@@ -722,58 +706,58 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
           <EntitySet Name="Meetups" EntityType="Self.Meetup" />
           <EntitySet Name="MeetupParticipants" EntityType="Self.MeetupParticipant" />
           <EntitySet Name="PlayerLogins" EntityType="Self.PlayerLogin" />
+          <EntitySet Name="PlayerProfiles" EntityType="Self.PlayerProfile" />
           <EntitySet Name="PlayerRelationships" EntityType="Self.PlayerRelationship" />
           <EntitySet Name="ProfileTitles" EntityType="Self.ProfileTitle" />
-          <EntitySet Name="PlayerProfiles" EntityType="Self.PlayerProfile" />
-          <AssociationSet Name="FK__Game__genre_id__6C190EBB" Association="Self.FK__Game__genre_id__6C190EBB">
+          <AssociationSet Name="FK__Game__genre_id__5629CD9C" Association="Self.FK__Game__genre_id__5629CD9C">
             <End Role="Genre" EntitySet="Genres" />
             <End Role="Game" EntitySet="Games" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__game_id__6FE99F9F" Association="Self.FK__Meetup__game_id__6FE99F9F">
+          <AssociationSet Name="FK__Meetup__game_id__59FA5E80" Association="Self.FK__Meetup__game_id__59FA5E80">
             <End Role="Game" EntitySet="Games" />
             <End Role="Meetup" EntitySet="Meetups" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__genre_id__70DDC3D8" Association="Self.FK__Meetup__genre_id__70DDC3D8">
+          <AssociationSet Name="FK__Meetup__genre_id__5AEE82B9" Association="Self.FK__Meetup__genre_id__5AEE82B9">
             <End Role="Genre" EntitySet="Genres" />
             <End Role="Meetup" EntitySet="Meetups" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__location__6EF57B66" Association="Self.FK__Meetup__location__6EF57B66">
+          <AssociationSet Name="FK__Meetup__location__59063A47" Association="Self.FK__Meetup__location__59063A47">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Meetup" EntitySet="Meetups" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__locat__66603565" Association="Self.FK__PlayerPro__locat__66603565">
+          <AssociationSet Name="FK__PlayerPro__locat__5070F446" Association="Self.FK__PlayerPro__locat__5070F446">
             <End Role="Location" EntitySet="Locations" />
             <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__Match__second_pl__74AE54BC" Association="Self.FK__Match__second_pl__74AE54BC">
+          <AssociationSet Name="FK__Match__second_pl__5EBF139D" Association="Self.FK__Match__second_pl__5EBF139D">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="Match" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK__Meetup__player_i__71D1E811" Association="Self.FK__Meetup__player_i__71D1E811">
+          <AssociationSet Name="FK__Meetup__player_i__5BE2A6F2" Association="Self.FK__Meetup__player_i__5BE2A6F2">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="Meetup" EntitySet="Meetups" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeetupPar__meetu__7F2BE32F" Association="Self.FK__MeetupPar__meetu__7F2BE32F">
+          <AssociationSet Name="FK__MeetupPar__meetu__693CA210" Association="Self.FK__MeetupPar__meetu__693CA210">
             <End Role="Meetup" EntitySet="Meetups" />
             <End Role="MeetupParticipant" EntitySet="MeetupParticipants" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeetupPar__playe__00200768" Association="Self.FK__MeetupPar__playe__00200768">
+          <AssociationSet Name="FK__MeetupPar__playe__6A30C649" Association="Self.FK__MeetupPar__playe__6A30C649">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="MeetupParticipant" EntitySet="MeetupParticipants" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__playe__656C112C" Association="Self.FK__PlayerPro__playe__656C112C">
+          <AssociationSet Name="FK__PlayerPro__playe__4F7CD00D" Association="Self.FK__PlayerPro__playe__4F7CD00D">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerRel__reque__02FC7413" Association="Self.FK__PlayerRel__reque__02FC7413">
+          <AssociationSet Name="FK__PlayerRel__reque__6D0D32F4" Association="Self.FK__PlayerRel__reque__6D0D32F4">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="PlayerRelationship" EntitySet="PlayerRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerRel__respo__03F0984C" Association="Self.FK__PlayerRel__respo__03F0984C">
+          <AssociationSet Name="FK__PlayerRel__respo__6E01572D" Association="Self.FK__PlayerRel__respo__6E01572D">
             <End Role="PlayerLogin" EntitySet="PlayerLogins" />
             <End Role="PlayerRelationship" EntitySet="PlayerRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlayerPro__profi__6754599E" Association="Self.FK__PlayerPro__profi__6754599E">
+          <AssociationSet Name="FK__PlayerPro__profi__5165187F" Association="Self.FK__PlayerPro__profi__5165187F">
             <End Role="ProfileTitle" EntitySet="ProfileTitles" />
             <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
           </AssociationSet>
@@ -791,7 +775,7 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DiceItUpModelStoreContainer" CdmEntityContainer="DiceItUpEntities2">
+        <EntityContainerMapping StorageEntityContainer="DiceItUpModelStoreContainer" CdmEntityContainer="DiceItUpEntities4">
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="DiceItUpModel.Game">
               <MappingFragment StoreEntitySet="Game">
@@ -863,6 +847,22 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PlayerProfiles">
+            <EntityTypeMapping TypeName="DiceItUpModel.PlayerProfile">
+              <MappingFragment StoreEntitySet="PlayerProfile">
+                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="profile_level" ColumnName="profile_level" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PlayerRelationships">
             <EntityTypeMapping TypeName="DiceItUpModel.PlayerRelationship">
               <MappingFragment StoreEntitySet="PlayerRelationship">
@@ -877,21 +877,6 @@ warning 6002: The table/view 'DiceItUp.dbo.PlayerProfile' does not have a primar
               <MappingFragment StoreEntitySet="ProfileTitle">
                 <ScalarProperty Name="profile_level" ColumnName="profile_level" />
                 <ScalarProperty Name="title" ColumnName="title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlayerProfiles">
-            <EntityTypeMapping TypeName="DiceItUpModel.PlayerProfile">
-              <MappingFragment StoreEntitySet="PlayerProfile">
-                <ScalarProperty Name="player_id" ColumnName="player_id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="profile_level" ColumnName="profile_level" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="feedback" ColumnName="feedback" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

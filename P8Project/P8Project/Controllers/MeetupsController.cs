@@ -12,7 +12,7 @@ namespace P8Project.Controllers
 {
     public class MeetupsController : Controller
     {
-        private DiceItUpEntities2 db = new DiceItUpEntities2();
+        private DiceItUpEntities4 db = new DiceItUpEntities4();
 
         // GET: Meetups
         public ActionResult Index()

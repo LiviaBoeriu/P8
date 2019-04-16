@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using P8Project.ViewModel;
 
 namespace P8Project.Controllers
 {
@@ -13,7 +14,7 @@ namespace P8Project.Controllers
 
     public class AccountController : Controller
     {
-        private readonly DiceItUpEntities2 db = new DiceItUpEntities2();
+        private readonly DiceItUpEntities4 db = new DiceItUpEntities4();
 
         public ActionResult Index()
         {
@@ -69,16 +70,35 @@ namespace P8Project.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "email , password")] PlayerLogin playerLogin)
+        public ActionResult Register([Bind(Include = "Email, Password, FirstName, LastName")]RegisterProfile registerProfile)
         {
             if (ModelState.IsValid)
             {
-                var userLogin = db.PlayerLogins.FirstOrDefault(row => row.email == playerLogin.email && row.password == playerLogin.password);
-                if (userLogin == null)
+
+                PlayerProfile profile = new PlayerProfile();
+                PlayerLogin login = new PlayerLogin();
+
+                var userRegister = db.PlayerLogins.FirstOrDefault(row => row.email == registerProfile.Email && row.password == registerProfile.Password);
+
+                if (userRegister == null)
                 {
-                    db.PlayerLogins.Add(playerLogin);
+                    //assign the player id that is registered to our object
+                    login.email = registerProfile.Email;
+                    login.password = registerProfile.Password;
+                    profile.first_name = registerProfile.FirstName;
+                    profile.last_name = registerProfile.LastName;
+                }
+
+                if (login != null)
+                {
+                    db.PlayerLogins.Add(login);
                     db.SaveChanges();
-                    return RedirectToAction("Register", "Account", playerLogin);
+
+                    profile.player_id = login.player_id;
+
+                    db.PlayerProfiles.Add(profile);
+                    db.SaveChanges();
+                    return RedirectToAction("Register", "Account", registerProfile);
                 }
 
             }
