@@ -1,0 +1,961 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DiceItUpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_id" Type="int" />
+          <Property Name="game_title" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_genre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zip_code" Type="char" MaxLength="4" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="match_id" />
+          </Key>
+          <Property Name="match_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_player_id" Type="int" />
+          <Property Name="second_player_id" Type="int" />
+          <Property Name="match_state" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="first_player_state" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="second_player_state" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meetup">
+          <Key>
+            <PropertyRef Name="meetup_id" />
+          </Key>
+          <Property Name="meetup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="meetup_date" Type="date" />
+          <Property Name="start_time" Type="time" Precision="7" />
+          <Property Name="end_time" Type="time" Precision="7" />
+          <Property Name="meetup_access" Type="varchar" MaxLength="10" />
+          <Property Name="meetup_state" Type="varchar" MaxLength="15" />
+          <Property Name="game_id" Type="int" />
+          <Property Name="genre_id" Type="int" />
+          <Property Name="meetup_note" Type="varchar" MaxLength="100" />
+          <Property Name="player_id" Type="int" />
+        </EntityType>
+        <EntityType Name="MeetupParticipant">
+          <Key>
+            <PropertyRef Name="meetup_id" />
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="meetup_id" Type="int" Nullable="false" />
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="attended" Type="bit" />
+        </EntityType>
+        <EntityType Name="PlayerGamePreferences">
+          <Key>
+            <PropertyRef Name="player_id" />
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerLogin">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerProfile">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="profile_level" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
+          <Property Name="feedback" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="avatar_path" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerRelationship">
+          <Key>
+            <PropertyRef Name="requester_player_id" />
+            <PropertyRef Name="respondent_player_id" />
+          </Key>
+          <Property Name="requester_player_id" Type="int" Nullable="false" />
+          <Property Name="respondent_player_id" Type="int" Nullable="false" />
+          <Property Name="relationship_state" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PlayerTopGames">
+          <Key>
+            <PropertyRef Name="player_id" />
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfileTitle">
+          <Key>
+            <PropertyRef Name="profile_level" />
+          </Key>
+          <Property Name="profile_level" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Game__genre_id__5629CD9C">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__game_id__59FA5E80">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__genre_id__5AEE82B9">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__location__59063A47">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__player_i__5BE2A6F2">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetupPar__meetu__68487DD7">
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="1" />
+          <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetup">
+              <PropertyRef Name="meetup_id" />
+            </Principal>
+            <Dependent Role="MeetupParticipant">
+              <PropertyRef Name="meetup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetupPar__playe__693CA210">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="MeetupParticipant">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerGam__genre__619B8048">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="PlayerGamePreferences" Type="Self.PlayerGamePreferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="PlayerGamePreferences">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerGam__playe__60A75C0F">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerGamePreferences" Type="Self.PlayerGamePreferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerGamePreferences">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__locat__5070F446">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__playe__4F7CD00D">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__profi__5165187F">
+          <End Role="ProfileTitle" Type="Self.ProfileTitle" Multiplicity="0..1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileTitle">
+              <PropertyRef Name="profile_level" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="profile_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerRel__reque__6C190EBB">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerRelationship">
+              <PropertyRef Name="requester_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerRel__respo__6D0D32F4">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerRelationship">
+              <PropertyRef Name="respondent_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerTop__game___656C112C">
+          <End Role="Game" Type="Self.Game" Multiplicity="1" />
+          <End Role="PlayerTopGames" Type="Self.PlayerTopGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="PlayerTopGames">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerTop__playe__6477ECF3">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerTopGames" Type="Self.PlayerTopGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerTopGames">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Profile">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="first_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_SecondProfile">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="second_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiceItUpModelStoreContainer">
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meetup" EntityType="Self.Meetup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeetupParticipant" EntityType="Self.MeetupParticipant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerGamePreferences" EntityType="Self.PlayerGamePreferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerLogin" EntityType="Self.PlayerLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerProfile" EntityType="Self.PlayerProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerRelationship" EntityType="Self.PlayerRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayerTopGames" EntityType="Self.PlayerTopGames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileTitle" EntityType="Self.ProfileTitle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Game__genre_id__5629CD9C" Association="Self.FK__Game__genre_id__5629CD9C">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Game" EntitySet="Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__game_id__59FA5E80" Association="Self.FK__Meetup__game_id__59FA5E80">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="Meetup" EntitySet="Meetup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__genre_id__5AEE82B9" Association="Self.FK__Meetup__genre_id__5AEE82B9">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Meetup" EntitySet="Meetup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__location__59063A47" Association="Self.FK__Meetup__location__59063A47">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Meetup" EntitySet="Meetup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__player_i__5BE2A6F2" Association="Self.FK__Meetup__player_i__5BE2A6F2">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="Meetup" EntitySet="Meetup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetupPar__meetu__68487DD7" Association="Self.FK__MeetupPar__meetu__68487DD7">
+            <End Role="Meetup" EntitySet="Meetup" />
+            <End Role="MeetupParticipant" EntitySet="MeetupParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetupPar__playe__693CA210" Association="Self.FK__MeetupPar__playe__693CA210">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="MeetupParticipant" EntitySet="MeetupParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerGam__genre__619B8048" Association="Self.FK__PlayerGam__genre__619B8048">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="PlayerGamePreferences" EntitySet="PlayerGamePreferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerGam__playe__60A75C0F" Association="Self.FK__PlayerGam__playe__60A75C0F">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="PlayerGamePreferences" EntitySet="PlayerGamePreferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__locat__5070F446" Association="Self.FK__PlayerPro__locat__5070F446">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__playe__4F7CD00D" Association="Self.FK__PlayerPro__playe__4F7CD00D">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__profi__5165187F" Association="Self.FK__PlayerPro__profi__5165187F">
+            <End Role="ProfileTitle" EntitySet="ProfileTitle" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerRel__reque__6C190EBB" Association="Self.FK__PlayerRel__reque__6C190EBB">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="PlayerRelationship" EntitySet="PlayerRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerRel__respo__6D0D32F4" Association="Self.FK__PlayerRel__respo__6D0D32F4">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="PlayerRelationship" EntitySet="PlayerRelationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerTop__game___656C112C" Association="Self.FK__PlayerTop__game___656C112C">
+            <End Role="Game" EntitySet="Game" />
+            <End Role="PlayerTopGames" EntitySet="PlayerTopGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerTop__playe__6477ECF3" Association="Self.FK__PlayerTop__playe__6477ECF3">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="PlayerTopGames" EntitySet="PlayerTopGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Profile" Association="Self.FK_Match_Profile">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondProfile" Association="Self.FK_Match_SecondProfile">
+            <End Role="PlayerLogin" EntitySet="PlayerLogin" />
+            <End Role="Match" EntitySet="Match" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiceItUpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="game_id" />
+          </Key>
+          <Property Name="game_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_id" Type="Int32" />
+          <Property Name="game_title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Game__genre_id__5629CD9C" FromRole="Game" ToRole="Genre" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__game_id__59FA5E80" FromRole="Game" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerLogins" Relationship="Self.PlayerTopGames" FromRole="Game" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_genre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="Self.FK__Game__genre_id__5629CD9C" FromRole="Genre" ToRole="Game" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__genre_id__5AEE82B9" FromRole="Genre" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerLogins" Relationship="Self.PlayerGamePreferences" FromRole="Genre" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="location_id" />
+          </Key>
+          <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zip_code" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__location__59063A47" FromRole="Location" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__locat__5070F446" FromRole="Location" ToRole="PlayerProfile" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="match_id" />
+          </Key>
+          <Property Name="match_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_player_id" Type="Int32" />
+          <Property Name="second_player_id" Type="Int32" />
+          <Property Name="match_state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_player_state" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="second_player_state" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FirstPlayer" Relationship="DiceItUpModel.FK_Match_Profile" FromRole="Match" ToRole="PlayerLogin" />
+          <NavigationProperty Name="SecondPlayer" Relationship="DiceItUpModel.FK_Match_SecondProfile" FromRole="Match" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="Meetup">
+          <Key>
+            <PropertyRef Name="meetup_id" />
+          </Key>
+          <Property Name="meetup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="meetup_date" Type="DateTime" Precision="0" />
+          <Property Name="start_time" Type="Time" Precision="7" />
+          <Property Name="end_time" Type="Time" Precision="7" />
+          <Property Name="meetup_access" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="meetup_state" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="Int32" />
+          <Property Name="genre_id" Type="Int32" />
+          <Property Name="meetup_note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="player_id" Type="Int32" />
+          <NavigationProperty Name="Game" Relationship="Self.FK__Meetup__game_id__59FA5E80" FromRole="Meetup" ToRole="Game" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Meetup__genre_id__5AEE82B9" FromRole="Meetup" ToRole="Genre" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Meetup__location__59063A47" FromRole="Meetup" ToRole="Location" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__Meetup__player_i__5BE2A6F2" FromRole="Meetup" ToRole="PlayerLogin" />
+          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__meetu__68487DD7" FromRole="Meetup" ToRole="MeetupParticipant" />
+        </EntityType>
+        <EntityType Name="MeetupParticipant">
+          <Key>
+            <PropertyRef Name="meetup_id" />
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="meetup_id" Type="Int32" Nullable="false" />
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <Property Name="attended" Type="Boolean" />
+          <NavigationProperty Name="Meetup" Relationship="Self.FK__MeetupPar__meetu__68487DD7" FromRole="MeetupParticipant" ToRole="Meetup" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__MeetupPar__playe__693CA210" FromRole="MeetupParticipant" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="PlayerLogin">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetup__player_i__5BE2A6F2" FromRole="PlayerLogin" ToRole="Meetup" />
+          <NavigationProperty Name="MeetupParticipants" Relationship="Self.FK__MeetupPar__playe__693CA210" FromRole="PlayerLogin" ToRole="MeetupParticipant" />
+          <NavigationProperty Name="PlayerProfile" Relationship="Self.FK__PlayerPro__playe__4F7CD00D" FromRole="PlayerLogin" ToRole="PlayerProfile" />
+          <NavigationProperty Name="PlayerRelationships" Relationship="Self.FK__PlayerRel__reque__6C190EBB" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
+          <NavigationProperty Name="PlayerRelationships1" Relationship="Self.FK__PlayerRel__respo__6D0D32F4" FromRole="PlayerLogin" ToRole="PlayerRelationship" />
+          <NavigationProperty Name="Genres" Relationship="Self.PlayerGamePreferences" FromRole="PlayerLogin" ToRole="Genre" />
+          <NavigationProperty Name="Games" Relationship="Self.PlayerTopGames" FromRole="PlayerLogin" ToRole="Game" />
+          <NavigationProperty Name="Matches" Relationship="DiceItUpModel.FK_Match_Profile" FromRole="PlayerLogin" ToRole="Match" />
+          <NavigationProperty Name="Matches1" Relationship="DiceItUpModel.FK_Match_SecondProfile" FromRole="PlayerLogin" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="PlayerProfile">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="profile_level" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="feedback" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="avatar_path" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__PlayerPro__locat__5070F446" FromRole="PlayerProfile" ToRole="Location" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerPro__playe__4F7CD00D" FromRole="PlayerProfile" ToRole="PlayerLogin" />
+          <NavigationProperty Name="ProfileTitle" Relationship="Self.FK__PlayerPro__profi__5165187F" FromRole="PlayerProfile" ToRole="ProfileTitle" />
+        </EntityType>
+        <EntityType Name="PlayerRelationship">
+          <Key>
+            <PropertyRef Name="requester_player_id" />
+            <PropertyRef Name="respondent_player_id" />
+          </Key>
+          <Property Name="requester_player_id" Type="Int32" Nullable="false" />
+          <Property Name="respondent_player_id" Type="Int32" Nullable="false" />
+          <Property Name="relationship_state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PlayerLogin" Relationship="Self.FK__PlayerRel__reque__6C190EBB" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
+          <NavigationProperty Name="PlayerLogin1" Relationship="Self.FK__PlayerRel__respo__6D0D32F4" FromRole="PlayerRelationship" ToRole="PlayerLogin" />
+        </EntityType>
+        <EntityType Name="ProfileTitle">
+          <Key>
+            <PropertyRef Name="profile_level" />
+          </Key>
+          <Property Name="profile_level" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PlayerProfiles" Relationship="Self.FK__PlayerPro__profi__5165187F" FromRole="ProfileTitle" ToRole="PlayerProfile" />
+        </EntityType>
+        <Association Name="FK__Game__genre_id__5629CD9C">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__game_id__59FA5E80">
+          <End Role="Game" Type="Self.Game" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="game_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__genre_id__5AEE82B9">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__location__59063A47">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__locat__5070F446">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meetup__player_i__5BE2A6F2">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="0..1" />
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Meetup">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetupPar__meetu__68487DD7">
+          <End Role="Meetup" Type="Self.Meetup" Multiplicity="1" />
+          <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetup">
+              <PropertyRef Name="meetup_id" />
+            </Principal>
+            <Dependent Role="MeetupParticipant">
+              <PropertyRef Name="meetup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeetupPar__playe__693CA210">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="MeetupParticipant" Type="Self.MeetupParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="MeetupParticipant">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__playe__4F7CD00D">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerRel__reque__6C190EBB">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerRelationship">
+              <PropertyRef Name="requester_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerRel__respo__6D0D32F4">
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="1" />
+          <End Role="PlayerRelationship" Type="Self.PlayerRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="PlayerRelationship">
+              <PropertyRef Name="respondent_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayerPro__profi__5165187F">
+          <End Role="ProfileTitle" Type="Self.ProfileTitle" Multiplicity="0..1" />
+          <End Role="PlayerProfile" Type="Self.PlayerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileTitle">
+              <PropertyRef Name="profile_level" />
+            </Principal>
+            <Dependent Role="PlayerProfile">
+              <PropertyRef Name="profile_level" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlayerGamePreferences">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="*" />
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="*" />
+        </Association>
+        <Association Name="PlayerTopGames">
+          <End Role="Game" Type="Self.Game" Multiplicity="*" />
+          <End Role="PlayerLogin" Type="Self.PlayerLogin" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DiceItUpEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="Meetups" EntityType="Self.Meetup" />
+          <EntitySet Name="MeetupParticipants" EntityType="Self.MeetupParticipant" />
+          <EntitySet Name="PlayerLogins" EntityType="Self.PlayerLogin" />
+          <EntitySet Name="PlayerProfiles" EntityType="Self.PlayerProfile" />
+          <EntitySet Name="PlayerRelationships" EntityType="Self.PlayerRelationship" />
+          <EntitySet Name="ProfileTitles" EntityType="Self.ProfileTitle" />
+          <AssociationSet Name="FK__Game__genre_id__5629CD9C" Association="Self.FK__Game__genre_id__5629CD9C">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__game_id__59FA5E80" Association="Self.FK__Meetup__game_id__59FA5E80">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="Meetup" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__genre_id__5AEE82B9" Association="Self.FK__Meetup__genre_id__5AEE82B9">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Meetup" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__location__59063A47" Association="Self.FK__Meetup__location__59063A47">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Meetup" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__locat__5070F446" Association="Self.FK__PlayerPro__locat__5070F446">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meetup__player_i__5BE2A6F2" Association="Self.FK__Meetup__player_i__5BE2A6F2">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="Meetup" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetupPar__meetu__68487DD7" Association="Self.FK__MeetupPar__meetu__68487DD7">
+            <End Role="Meetup" EntitySet="Meetups" />
+            <End Role="MeetupParticipant" EntitySet="MeetupParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeetupPar__playe__693CA210" Association="Self.FK__MeetupPar__playe__693CA210">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="MeetupParticipant" EntitySet="MeetupParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__playe__4F7CD00D" Association="Self.FK__PlayerPro__playe__4F7CD00D">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerRel__reque__6C190EBB" Association="Self.FK__PlayerRel__reque__6C190EBB">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="PlayerRelationship" EntitySet="PlayerRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerRel__respo__6D0D32F4" Association="Self.FK__PlayerRel__respo__6D0D32F4">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="PlayerRelationship" EntitySet="PlayerRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayerPro__profi__5165187F" Association="Self.FK__PlayerPro__profi__5165187F">
+            <End Role="ProfileTitle" EntitySet="ProfileTitles" />
+            <End Role="PlayerProfile" EntitySet="PlayerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="PlayerGamePreferences" Association="Self.PlayerGamePreferences">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+          </AssociationSet>
+          <AssociationSet Name="PlayerTopGames" Association="Self.PlayerTopGames">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_Profile" Association="DiceItUpModel.FK_Match_Profile">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_SecondProfile" Association="DiceItUpModel.FK_Match_SecondProfile">
+            <End Role="PlayerLogin" EntitySet="PlayerLogins" />
+            <End Role="Match" EntitySet="Matches" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Match_Profile">
+          <End Type="DiceItUpModel.PlayerLogin" Role="PlayerLogin" Multiplicity="0..1" />
+          <End Type="DiceItUpModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="first_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_SecondProfile">
+          <End Type="DiceItUpModel.PlayerLogin" Role="PlayerLogin" Multiplicity="0..1" />
+          <End Type="DiceItUpModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerLogin">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="second_player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiceItUpModelStoreContainer" CdmEntityContainer="DiceItUpEntities1">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="DiceItUpModel.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="game_title" ColumnName="game_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="DiceItUpModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="game_genre" ColumnName="game_genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="DiceItUpModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="zip_code" ColumnName="zip_code" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="DiceItUpModel.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="match_id" ColumnName="match_id" />
+                <ScalarProperty Name="first_player_id" ColumnName="first_player_id" />
+                <ScalarProperty Name="second_player_id" ColumnName="second_player_id" />
+                <ScalarProperty Name="match_state" ColumnName="match_state" />
+                <ScalarProperty Name="first_player_state" ColumnName="first_player_state" />
+                <ScalarProperty Name="second_player_state" ColumnName="second_player_state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetups">
+            <EntityTypeMapping TypeName="DiceItUpModel.Meetup">
+              <MappingFragment StoreEntitySet="Meetup">
+                <ScalarProperty Name="meetup_id" ColumnName="meetup_id" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="meetup_date" ColumnName="meetup_date" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="meetup_access" ColumnName="meetup_access" />
+                <ScalarProperty Name="meetup_state" ColumnName="meetup_state" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="meetup_note" ColumnName="meetup_note" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeetupParticipants">
+            <EntityTypeMapping TypeName="DiceItUpModel.MeetupParticipant">
+              <MappingFragment StoreEntitySet="MeetupParticipant">
+                <ScalarProperty Name="meetup_id" ColumnName="meetup_id" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="attended" ColumnName="attended" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerLogins">
+            <EntityTypeMapping TypeName="DiceItUpModel.PlayerLogin">
+              <MappingFragment StoreEntitySet="PlayerLogin">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerProfiles">
+            <EntityTypeMapping TypeName="DiceItUpModel.PlayerProfile">
+              <MappingFragment StoreEntitySet="PlayerProfile">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="profile_level" ColumnName="profile_level" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
+                <ScalarProperty Name="avatar_path" ColumnName="avatar_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerRelationships">
+            <EntityTypeMapping TypeName="DiceItUpModel.PlayerRelationship">
+              <MappingFragment StoreEntitySet="PlayerRelationship">
+                <ScalarProperty Name="requester_player_id" ColumnName="requester_player_id" />
+                <ScalarProperty Name="respondent_player_id" ColumnName="respondent_player_id" />
+                <ScalarProperty Name="relationship_state" ColumnName="relationship_state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileTitles">
+            <EntityTypeMapping TypeName="DiceItUpModel.ProfileTitle">
+              <MappingFragment StoreEntitySet="ProfileTitle">
+                <ScalarProperty Name="profile_level" ColumnName="profile_level" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PlayerGamePreferences" TypeName="DiceItUpModel.PlayerGamePreferences" StoreEntitySet="PlayerGamePreferences">
+            <EndProperty Name="Genre">
+              <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+            </EndProperty>
+            <EndProperty Name="PlayerLogin">
+              <ScalarProperty Name="player_id" ColumnName="player_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PlayerTopGames" TypeName="DiceItUpModel.PlayerTopGames" StoreEntitySet="PlayerTopGames">
+            <EndProperty Name="Game">
+              <ScalarProperty Name="game_id" ColumnName="game_id" />
+            </EndProperty>
+            <EndProperty Name="PlayerLogin">
+              <ScalarProperty Name="player_id" ColumnName="player_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

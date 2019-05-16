@@ -1,0 +1,21 @@
+﻿<div class="register-template">
+    <div class="register-description">
+        <h4>Welcome to Dice It Up!</h4>
+        <p>The go-to place for all things boardgame in one easy-to-use website.</p>
+        <p>Here it is up to you to decide: do you want to join a group of people to play? Or perhaps interested in creating a meetup yourself? Head to the Meetups section, where you can create and search meetups.</p>
+        <p>Or would you rather find individuals who share the same interest in boardgames as you? Click on the Matchmaking section, and try your luck with our special matchmaking dices to meet new game friends!</p>
+        <p>Happy gaming!</p>
+    </div>
+
+    <div class="register-form">
+        @{
+            if (Url.RequestContext.RouteData.Values["id"] == null)
+            {
+                Html.RenderPartial("LoginRegister");
+            } else
+            {
+                Html.RenderPartial("ProfileRegister");
+            }
+        }
+    </div>
+</div>

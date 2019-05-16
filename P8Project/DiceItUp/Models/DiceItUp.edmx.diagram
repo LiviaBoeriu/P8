@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2285b90a4a47495197357624b4a599f4" Name="Diagram1">
+        <EntityTypeShape EntityType="DiceItUpModel.Game" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.Genre" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.Location" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.Match" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.Meetup" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.MeetupParticipant" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.PlayerLogin" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.PlayerProfile" Width="1.5" PointX="13.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.PlayerRelationship" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiceItUpModel.ProfileTitle" Width="1.5" PointX="11.25" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="DiceItUpModel.FK__Game__genre_id__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__Meetup__game_id__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__Meetup__genre_id__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__Meetup__location__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__PlayerPro__locat__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__Meetup__player_i__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__MeetupPar__meetu__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__MeetupPar__playe__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__PlayerPro__playe__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__PlayerRel__reque__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__PlayerRel__respo__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK__PlayerPro__profi__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.PlayerGamePreferences" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.PlayerTopGames" ManuallyRouted="false" />
+        <AssociationConnector Association="DiceItUpModel.FK_Match_Profile" />
+        <AssociationConnector Association="DiceItUpModel.FK_Match_SecondProfile" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

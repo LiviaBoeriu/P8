@@ -1,0 +1,280 @@
+﻿body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    padding: 0;
+    min-height: calc(100vh - 280px);
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* _Layout */
+.navbar {
+    padding: 0px 50px;
+    height: 100px;
+    background-color: dodgerblue;
+}
+
+.navbar-brand {
+    font-size: 36px;
+    color: white !important;
+}
+
+    .navbar-brand p {
+        margin: 0;
+    }
+
+/*Account/ProfileRegister*/
+.gender-form-group {
+    align-items: center;
+}
+
+    .gender-form-group label {
+        margin: 0;
+    }
+
+    .gender-form-group .form-check-inline {
+        margin-left: 20px;
+    }
+/* Account/Index */
+.register-template {
+    min-height: calc(100vh - 280px);
+    display: flex;
+    background-image: url("../images/board-game.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+    .register-template > * {
+        padding: 50px;
+    }
+
+    .register-template .register-description {
+        width: 60%;
+    }
+
+    .register-template .register-form {
+        width: 40%;
+    }
+
+        .register-template .register-form .row {
+            margin: 0 0 16px 0;
+        }
+
+/*PlayerProfiles/Details*/
+.player-profile .card-column .card {
+    margin-left: calc(50% - 12rem);
+}
+
+.player-title {
+    text-align: center;
+}
+
+/*PlayerProfiles/Edit*/
+.player-profile .card .card-title,
+.player-profile .card .city-field {
+    display: flex;
+    align-items: center;
+}
+
+    .player-profile .card .city-field select {
+        margin-left: 10px;
+    }
+
+.player-profile .card .match {
+    text-align: center;
+    padding: 10px;
+    width: 50%;
+    margin: 0;
+}
+
+    .player-profile .card .match img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 6px;
+    }
+
+    .player-profile .card .match p {
+        margin: 0px;
+    }
+
+
+.player-profile .match-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.player-profile form {
+    width: 100%;
+}
+
+.card-img-top {
+    margin-left: calc(50% - 100px);
+    height: 200px;
+    width: 200px;
+}
+
+.player-profile {
+    margin: 50px 0px;
+}
+
+    .player-profile .card .card-title input,
+    .player-profile .card .card-title select {
+        margin-left: 10px;
+        width: 64%;
+    }
+
+.matchmaking-description {
+    padding: 50px 0px;
+}
+
+    .matchmaking-description p,
+    .matchmaking-description h4 {
+        text-align: center;
+    }
+
+    .matchmaking-description h4 {
+        margin-bottom: 16px;
+    }
+
+    .matchmaking-description button {
+        position: absolute;
+        width: 120px;
+        left: calc(50% - 60px);
+    }
+
+.matchmaking-players {
+    display: flex;
+    justify-content: space-around;
+}
+
+    .matchmaking-players .card .match-button {
+        width: 100px;
+        margin-left: calc(50% - 50px);
+        margin-bottom: 10px;
+    }
+
+.player-profile .card .match-list-title {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.match .far {
+    font-size: 24px;
+    margin: 4px 6px;
+}
+
+    .match .far:hover {
+        cursor: pointer;
+    }
+
+.match .fa-check-circle {
+    color: forestgreen;
+}
+
+.match .fa-times-circle {
+    color: darkred;
+}
+
+
+/*Style for the ribbon in the player profile*/
+.ribbon {
+    font-size: 16px !important;
+    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+    width: 33%;
+    position: relative;
+    background: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 1em 2em; /* Adjust to suit */
+    margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+
+.ribbon:before, .ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 1.5em solid #006fe6;
+    z-index: -1;
+}
+
+.ribbon:before {
+    left: -2em;
+    border-right-width: 1.5em;
+    border-left-color: transparent;
+}
+
+.ribbon:after {
+    right: -2em;
+    border-left-width: 1.5em;
+    border-right-color: transparent;
+}
+
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-style: solid;
+    border-color: #004998 transparent transparent transparent;
+    bottom: -1em;
+}
+
+.ribbon .ribbon-content:before {
+    left: 0;
+    border-width: 1em 0 0 1em;
+}
+
+.ribbon .ribbon-content:after {
+    right: 0;
+    border-width: 1em 1em 0 0;
+}
+
+.non-semantic-protector {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-items {
+    position: absolute;
+    margin-left: 300px;
+}
+
+.nav-item {
+    font-size: 22px;
+    color: white;
+    margin-right: 30px;
+}
+
+.nav-item:hover {
+    color: white;
+}
+
+.footer {
+    background-color: #272727;
+    padding: 30px 0px;
+}
+
+.footer p {
+    color: white;
+}
+
+.footer-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid white;
+}
+
+.footer-box:last-child {
+    border-right: none;
+}

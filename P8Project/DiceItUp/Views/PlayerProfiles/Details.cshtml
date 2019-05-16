@@ -1,0 +1,118 @@
+﻿@model DiceItUp.Models.PlayerProfile
+
+<div class="non-semantic-protector">
+    <h1 class="ribbon">
+        <strong class="ribbon-content">@Model.ProfileTitle.title @Model.first_name</strong>
+    </h1>
+</div>
+
+<div class="row player-profile">
+    <div class="col-4 offset-2 card-column">
+        <div class="card" style="width: 24rem;">
+            <h5 class="player-title">  @Model.ProfileTitle.title </h5>
+            <img src="~/Content/images/avatars/@Model.avatar_path" class="card-img-top" align="middle">
+            <div class="card-body">
+                <h5 class="card-title">Name: @Model.first_name</h5>
+                <p class="card-text">City: @Model.Location.city</p>
+                <p class="card-text">Gender: @ViewData["Gender"]</p>
+            </div>
+        </div>
+
+        <div class="card match-list" style="width: 24rem; margin-top: 40px;">
+            <h5 class="card-title match-list-title"> My matches </h5>
+            @foreach (var match in ViewBag.Matches)
+            {
+                <div class="match">
+                    <img src="~/Content/images/avatars/@match.SecondPlayer.PlayerProfile.avatar_path" class="match-avatar" align="middle">
+                    <p> @match.SecondPlayer.PlayerProfile.first_name @match.SecondPlayer.PlayerProfile.last_name</p>
+                    <p><b>@match.match_state</b></p>
+                </div>
+            }
+            @foreach (var match in ViewBag.AcceptedMatches)
+            {
+                <div class="match">
+                    <img src="~/Content/images/avatars/@match.FirstPlayer.PlayerProfile.avatar_path" class="match-avatar" align="middle">
+                    <p> @match.FirstPlayer.PlayerProfile.first_name @match.FirstPlayer.PlayerProfile.last_name</p>
+                    <p><b>@match.match_state</b></p>
+                </div>
+            }
+        </div>
+
+        <div class="card match-list" style="width: 24rem; margin-top: 40px;">
+            <h5 class="card-title match-list-title"> Invitations </h5>
+            @foreach (var match in ViewBag.Invitations)
+            {
+                <div class="match" id="@match.FirstPlayer.PlayerProfile.player_id">
+                    <img src="~/Content/images/avatars/@match.FirstPlayer.PlayerProfile.avatar_path" class="match-avatar" align="middle">
+                    <p> @match.FirstPlayer.PlayerProfile.first_name @match.FirstPlayer.PlayerProfile.last_name</p>
+
+                    @{
+                        if (match.match_state == "Pending")
+                        {
+                            <p><i class="far fa-check-circle"></i> <i class="far fa-times-circle"></i></p>
+                        }
+                        @*else
+                        {
+                            <p><b>Accepted</b></p>
+                        }*@
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    @* container for about me *@
+    <div class="col-4">
+        <div class="description-section">
+            <h5>About me </h5>
+            <p>@Model.description</p>
+        </div>
+
+        @*<div class="description-section">
+                <h5>Spilpraeferencer</h5>
+
+            </div>
+
+            <div class="description-section">
+                <h5>Top 5 spil</h5>
+
+            </div>*@
+        <input class="btn btn-primary" type="button" value="Edit Profile" onclick="location.href='@Url.Action("Edit", "PlayerProfiles", new { id = Model.player_id})'">
+    </div>
+</div>
+
+
+<script>
+    function respond(response, opponentId) {
+        var postData = {
+            opponentId: opponentId,
+            playerId: @Model.player_id,
+            response: response,
+            success: function () {
+                location.reload();
+            }
+        };
+
+        $.post({
+            url: "/PlayerProfiles/Respond",
+            data: postData
+        });
+    }
+
+    var acceptButtons = document.getElementsByClassName('fa-check-circle');
+    var declineButtons = document.getElementsByClassName('fa-times-circle');
+
+    for (var i = 0; i < acceptButtons.length; i++) {
+        acceptButtons[i].addEventListener("click", function (event) {
+            var acceptButton = event.target;
+            respond("Accepted", acceptButton.parentElement.parentElement.getAttribute("id"));
+        }, false);
+    }
+
+    for (var i = 0; i < declineButtons.length; i++) {
+        declineButtons[i].addEventListener("click", function (event) {
+            var declineButton = event.target;
+            respond("Rejected", declineButton.parentElement.parentElement.getAttribute("id"));
+        }, false);
+    }
+</script>

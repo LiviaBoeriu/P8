@@ -1,0 +1,43 @@
+﻿@model DiceItUp.Models.PlayerProfile
+
+@using (Html.BeginForm("RegisterProfile", "Account", new { id = Url.RequestContext.RouteData.Values["id"] }, FormMethod.Post))
+{
+    <div class="form-group row">
+        <label for="first_name">First name</label>
+        <input type="text" class="form-control" name="first_name" id="firstName" placeholder="Enter your first name">
+    </div>
+
+    <div class="form-group row">
+        <label for="last_name">Last name</label>
+        <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Enter your last name">
+    </div>
+
+    <div class="form-group row gender-form-group">
+        <label for="first_name">Gender </label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="F">
+            <label class="form-check-label" for="femaleGender">
+                Female
+            </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="M">
+            <label class="form-check-label" for="maleGender">
+                Male
+            </label>
+        </div>
+
+    </div>
+
+    <div class="form-group row gender-form-group">
+        <select class="form-control" name="location_id">
+            @foreach (var location in ViewBag.Locations)
+            {
+                <option value="@location.location_id" selected>@location.city </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Create Profile</button>
+}

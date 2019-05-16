@@ -1,0 +1,59 @@
+﻿<div class="matchmaking-description">
+    <h4>Velkommen til Match Arena!</h4>
+    <p> Her kan du finde andre spillere at matche med</p>
+    <p> Rul med terningerne for at finde matches!</p>
+    @*<button type="button" class="btn btn-primary" id="showPlayers">Match me!</button>*@
+</div>
+
+<div class="row" id="matchmakingPlayersSection" style="display: flex;">
+    <div class="col-10 offset-1 matchmaking-players">
+        @foreach (var player in ViewBag.Players)
+        {
+            <div class="card" style="width: 18rem;">
+                <h5 class="player-title">  @player.ProfileTitle.title </h5>
+                <img src="~/Content/images/avatars/@player.avatar_path" class="card-img-top" align="middle">
+                <div class="card-body">
+                    <h5 class="card-title">Name: @player.first_name <span>@player.last_name</span></h5>
+                    <p class="card-text">City: @player.Location.city</p>
+                </div>
+                <button type="button" playerId="@Url.RequestContext.RouteData.Values["id"]" opponentId="@player.player_id" class="btn btn-primary match-button">Match!</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    var playersSection = document.getElementById("matchmakingPlayersSection");
+    var showPlayers = document.getElementById("showPlayers");
+
+    var matchButtons = document.getElementsByClassName('match-button');
+
+    for (var i = 0; i < matchButtons.length; i++) {
+        matchButtons[i].addEventListener("click", function (event) {
+            if (event.target.className.indexOf('btn-primary') !== -1) {
+                var currentButton = event.target;
+
+                var postData = {
+                    opponentId: currentButton.getAttribute("opponentId"),
+                    playerId: currentButton.getAttribute("playerId")
+                };
+
+                $.post({
+                    url: "/PlayerProfiles/Invite",
+                    data: postData,
+                    success: function () {
+                        currentButton.classList.remove("btn-primary");
+                        currentButton.classList.add("btn-warning");
+                        currentButton.setAttribute('disabled', true);
+                        currentButton.innerHTML = "Pending";
+                    }
+                });
+            }
+        }, false);
+    }
+
+    showPlayers.addEventListener('click', function () {
+        playersSection.style.display = 'flex';
+    });
+</script>
+

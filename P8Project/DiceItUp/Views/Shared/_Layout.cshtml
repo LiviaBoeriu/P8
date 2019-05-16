@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice It Up</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/Main.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-light">
+        @{ var id = Url.RequestContext.RouteData.Values["id"]; }
+
+        @Html.ActionLink("Dice It Up", "Register", "Account", null, new { @class = "navbar-brand" })
+
+        <div class="nav-items">
+            @if (id != null)
+            {
+                @Html.ActionLink("Match Arena", "Matchmaking", "PlayerProfiles", new { id = id }, new { @class = "nav-item" })
+                @*@Html.ActionLink("Random", "Matchmaking", "PlayerProfiles", new { id = id }, new { @class = "nav-item" })*@
+            }
+        </div>
+    </nav>
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+
+    <div class="footer row">
+        <div class="col-4 footer-box">
+            <p>Hjælp</p>
+            <p>FAQ</p>
+            <p>Sprog</p>
+        </div>
+        <div class="col-4 footer-box">
+            <p>Om os</p>
+            <p>Privatlivspolitik</p>
+            <p>Vilkår og betingelser</p>
+        </div>
+        <div class="col-4 footer-box">
+            <p class="address-name"> Selma lagerløfs vej 300,</p>
+            <p class="address-code">9220 Aalborg Øst</p>
+            <p class="phone"> +45 98765432</p>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

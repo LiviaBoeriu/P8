@@ -1,0 +1,90 @@
+﻿@model DiceItUp.Models.PlayerProfile
+
+@{
+    bool isFemale = false;
+    bool isMale = false;
+
+    if (Model.gender == "F")
+    { isFemale = true; }
+    else
+    { isMale = true; }
+}
+
+<div class="row player-profile">
+    <form action="/PlayerProfiles/Edit/@Model.player_id" method="post" class="row">
+        <input value="@Model.player_id" name="player_id" style="display: none" />
+        <input value="@Model.profile_level" name="profile_level" style="display: none" />
+        <input value="@Model.feedback" name="feedback" style="display: none" />
+        <div class="col-4 offset-2 card-column">
+            <div class="card" style="width: 24rem;">
+                <h5 class="player-title"> @ViewData["Title"]</h5>
+                <img src="~/Content/images/avatars/@Model.avatar_path" class="card-img-top" align="middle">
+                <div class="card-body">
+                    <h5 class="card-title">Avatar: 
+                        <select class="form-control" name="avatar_path">
+                            <option value="adam.png" selected="@(Model.avatar_path == "adam.png" ? "selected" : null)">Adam</option>
+                            <option value="anjali.png" selected="@(Model.avatar_path == "anjali.png" ? "selected" : null)">Anjali</option>
+                            <option value="arjun.png" selected="@(Model.avatar_path == "arjun.png" ? "selected" : null)">Arjun</option>
+                            <option value="jorge.png" selected="@(Model.avatar_path == "jorge.png" ? "selected" : null)">Jorge</option>
+                            <option value="maya.png" selected="@(Model.avatar_path == "maya.png" ? "selected" : null)">Maya</option>
+                            <option value="rahul.png" selected="@(Model.avatar_path == "rahul.png" ? "selected" : null)">Rahul</option>
+                            <option value="sadona.png" selected="@(Model.avatar_path == "sadona.png" ? "selected" : null)">Sadona</option>
+                            <option value="sandy.png" selected="@(Model.avatar_path == "sandy.png" ? "selected" : null)">Sandy</option>
+                            <option value="sid.png" selected="@(Model.avatar_path == "sid.png" ? "selected" : null)">Sid</option>
+                            <option value="steve.png" selected="@(Model.avatar_path == "steve.png" ? "selected" : null)">Steve</option>
+                        </select>
+                    </h5>
+                    <h5 class="card-title">First name: <input type="text" class="form-control" name="first_name" id="firstName" value="@Model.first_name"></h5>
+                    <h5 class="card-title">Last name: <input type="text" class="form-control" name="last_name" id="lastName" value="@Model.last_name"></h5>
+
+                    <p class="card-text city-field">
+                        City:
+                        <select class="form-control" name="location_id">
+                            @foreach (var city in ViewBag.locations)
+                            {
+                                <option selected="@(Model.location_id == city.location_id ? "selected" : null)" value="@city.location_id">@city.city</option>
+                            }
+                        </select>
+                    </p>
+                    <div class="card-text">
+                        Gender:
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="F" checked="@isFemale">
+                            <label class="form-check-label" for="femaleGender">
+                                Female
+                            </label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="M" checked="@isMale">
+                            <label class="form-check-label" for="maleGender">
+                                Male
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* container for about me *@
+        <div class="col-4">
+            <div class="description-section">
+                <h5>About me </h5>
+                <div class="form-group">
+                    <textarea class="form-control" name="description" rows="5" style="resize: none">@Model.description</textarea>
+                </div>
+            </div>
+
+            @*<div class="description-section">
+                <h5>Spilpraeferencer</h5>
+
+                </div>
+
+                <div class="description-section">
+                    <h5>Top 5 spil</h5>
+
+                </div>*@
+            <button type="submit" class="btn btn-primary mb-2">Update profile</button>
+        </div>
+    </form>
+</div>
